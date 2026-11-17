@@ -1,22 +1,26 @@
-﻿import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const genreRecords = [
   {
     name: "Fiction",
+    slug: "fiction",
     description: "Novels, short stories, and imaginative literature.",
   },
   {
     name: "Science",
+    slug: "science",
     description: "Books exploring scientific discoveries and ideas.",
   },
   {
     name: "History",
+    slug: "history",
     description: "Books about historical events and human civilization.",
   },
   {
     name: "Technology",
+    slug: "technology",
     description: "Books about software, computing, and modern technology.",
   },
 ];
@@ -150,7 +154,7 @@ async function main() {
   for (const genre of genreRecords) {
     const savedGenre = await prisma.genre.upsert({
       where: { name: genre.name },
-      update: { description: genre.description },
+      update: { slug: genre.slug, description: genre.description },
       create: genre,
     });
 
