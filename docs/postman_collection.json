@@ -49,35 +49,83 @@
           "name": "List genres",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/genres"
+            "url": "{{baseUrl}}/genres",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
           }
         },
         {
           "name": "Create genre",
           "request": {
             "method": "POST",
-            "url": "{{baseUrl}}/genres"
+            "url": "{{baseUrl}}/genres",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Biography\",\n  \"slug\": \"biography\",\n  \"description\": \"Life stories and biographies\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           }
         },
         {
           "name": "Get genre",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/genres/1"
+            "url": "{{baseUrl}}/genres/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
           }
         },
         {
           "name": "Update genre",
           "request": {
             "method": "PATCH",
-            "url": "{{baseUrl}}/genres/1"
+            "url": "{{baseUrl}}/genres/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated genre description\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           }
         },
         {
           "name": "Delete genre",
           "request": {
             "method": "DELETE",
-            "url": "{{baseUrl}}/genres/1"
+            "url": "{{baseUrl}}/genres/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
           }
         }
       ]
@@ -109,9 +157,22 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{librarianToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
               }
-            ]
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Example Book\",\n  \"author\": \"A. Writer\",\n  \"isbn\": \"9780000000001\",\n  \"totalCopies\": 5,\n  \"genreId\": 1,\n  \"description\": \"An example book record\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           }
         },
         {
@@ -122,9 +183,22 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}"
+                "value": "Bearer {{librarianToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
               }
-            ]
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalCopies\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           }
         },
         {
@@ -159,6 +233,20 @@
           }
         }
       ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": "PASTE_PATRON_OR_USER_TOKEN"
+    },
+    {
+      "key": "librarianToken",
+      "value": "PASTE_LIBRARIAN_TOKEN"
     }
   ]
 }
