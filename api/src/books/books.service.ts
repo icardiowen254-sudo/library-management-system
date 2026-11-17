@@ -16,7 +16,7 @@ export class BooksService {
   return { data, meta: { total, page, limit, totalPages: Math.ceil(total / limit) } };
  }
  async findOne(id: number) { const book = await this.prisma.book.findUnique({ where: { id }, include: { genre: true } }); if (!book) throw new NotFoundException('Book not found'); return book; }
- create(dto: CreateBookDto) { return this.prisma.book.create({ data: { ...dto, availableCopies: dto.totalCopies }, include: { genre: true } }); }
+ create(dto: CreateBookDto) { const data: Prisma.BookUncheckedCreateInput = { ...dto, availableCopies: dto.totalCopies }; return this.prisma.book.create({ data, include: { genre: true } }); }
  async update(id: number, dto: UpdateBookDto) { await this.findOne(id); const data: Prisma.BookUncheckedUpdateInput = { ...dto }; return this.prisma.book.update({ where: { id }, data, include: { genre: true } }); }
  async remove(id: number) { await this.findOne(id); return this.prisma.book.delete({ where: { id } }); }
 }
